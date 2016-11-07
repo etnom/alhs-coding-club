@@ -1,5 +1,6 @@
 var mySprite;
-var myNumber = 1;
+
+var keyW, keyA, keyS, keyD;
 
 var gameVar = {
     preload: function () {
@@ -9,24 +10,27 @@ var gameVar = {
     create: function() {
         console.log("its working!");
         
+        keyW = game.input.keyboard.addKey(Phaser.Keyboard.W);
+        keyA = game.input.keyboard.addKey(Phaser.Keyboard.A);
+        keyS = game.input.keyboard.addKey(Phaser.Keyboard.S);
+        keyD = game.input.keyboard.addKey(Phaser.Keyboard.D);
+
+        
         mySprite = game.add.sprite(10, 10, "yayIMG");
     }, 
     
     update: function () {
-        // if (myNumber === 1) {
-        //     mySprite.kill();
-        // }
-        
-        if (mySprite.x < 50) {
-            mySprite.x += myNumber;
-            mySprite.y += myNumber;
-        } else if (mySprite.x < 200) {
-            mySprite.x += myNumber * 4;
-            mySprite.x += myNumber * 4;
-        } else {
-            mySprite.x += myNumber * 2;
-            mySprite.y += myNumber * 2;
+        if (keyW.isDown) {
+            console.log("keyW is down");
+        } else if (keyA.isDown) {
+            
+        } else if (keyS.isDown) {
+            
+        }else if (keyD.isDown) {
+            
         }
+        
+        
         
         
     }
