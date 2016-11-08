@@ -18,7 +18,11 @@ var gameVar = {
         keyD = game.input.keyboard.addKey(Phaser.Keyboard.D);
 
         
-        mySprite = game.add.sprite(10, 10, "yayIMG");
+        mySprite = game.add.sprite(game.width/2, game.height/2, "yayIMG");
+        mySprite.x = game.width/2 - mySprite.width/2;
+        mySprite.y = game.height/2 - mySprite.height/2;
+        
+        
     }, 
     
     update: function () {
