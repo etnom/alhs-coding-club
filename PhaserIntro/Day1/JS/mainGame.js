@@ -1,4 +1,5 @@
 var mySprite;
+var backGround;
 
 var mySpriteSpeed =10 ;
 
@@ -7,6 +8,10 @@ var keyW, keyA, keyS, keyD;
 var gameVar = {
     preload: function () {
         game.load.image("yayIMG", "Assets/yay.jpg");
+        game.load.image("backgroundIMG", "Assets/shrekObamaMemeDontOpen.jpg");
+        game.load.image("sexyIMG", "Assets/sexyIMG.jpg");
+        
+        
     }, 
     
     create: function() {
@@ -17,11 +22,17 @@ var gameVar = {
         keyS = game.input.keyboard.addKey(Phaser.Keyboard.S);
         keyD = game.input.keyboard.addKey(Phaser.Keyboard.D);
 
+        backGround = game.add.sprite(0, 0, "backgroundIMG");
+        backGround.height = game.height;
+        backGround.width = game.width;
         
-        mySprite = game.add.sprite(game.width/2, game.height/2, "yayIMG");
+        mySprite = game.add.sprite(game.width/2, game.height/2, "sexyIMG");
+        
+        mySprite.scale.x = .5;
+        mySprite.scale.y = .5;
+        
         mySprite.x = game.width/2 - mySprite.width/2;
         mySprite.y = game.height/2 - mySprite.height/2;
-        
         
     }, 
     
