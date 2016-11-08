@@ -1,5 +1,7 @@
 var mySprite;
 
+var mySpriteSpeed =10 ;
+
 var keyW, keyA, keyS, keyD;
 
 var gameVar = {
@@ -21,13 +23,13 @@ var gameVar = {
     
     update: function () {
         if (keyW.isDown) {
-            console.log("keyW is down");
+            mySprite.y -= mySpriteSpeed;
         } else if (keyA.isDown) {
-            
+            mySprite.x -= mySpriteSpeed;
         } else if (keyS.isDown) {
-            
-        }else if (keyD.isDown) {
-            
+            mySprite.y += mySpriteSpeed;
+        } else if (keyD.isDown) {
+            mySprite.x += mySpriteSpeed;
         }
         
         
