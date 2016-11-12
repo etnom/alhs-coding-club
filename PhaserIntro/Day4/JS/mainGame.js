@@ -104,12 +104,14 @@ var gameVar = {
 
         }
         
+        //shoot
         if (keySpace.isDown) {
             //create bullets
             var bulletSprite = game.add.sprite(mySprite.x, mySprite.y, "bulletIMG");
             game.physics.arcade.enable(bulletSprite);
-            bulletSprite.width = 50;
-            bulletSprite.height = 20;
+            bulletSprite.scale.x = 0.25;
+            bulletSprite.scale.y = 0.25;
+//            bulletSprite.anchor = 0.5;
             //put bullet into array
             bulletArr[bulletArr.length] = bulletSprite;
             
@@ -118,16 +120,29 @@ var gameVar = {
             //shoot depend on direction mySprite is facing
             if (mySpriteFaceDirection === 0) {
                 bulletSprite.body.velocity.y -= bulletSpeed;
+                bulletSprite.angle = -90;
             } else if (mySpriteFaceDirection === 1) {
                 bulletSprite.body.velocity.x += bulletSpeed;
             } else if (mySpriteFaceDirection === 2) {
                 bulletSprite.body.velocity.y += bulletSpeed;
+                bulletSprite.angle = 90;
             } else if (mySpriteFaceDirection === 3) {
                 bulletSprite.body.velocity.x -= bulletSpeed;
+                bulletSprite.angle = 180;
+
             }
             
         }
         
+        //check collision between enemy and bullet
+        for (var enemy = 0; enemy < enemyArr.length; enemy++) {
+            for (var bullet = 0; bullet < bulletArr.length; bullet++) {
+                if (game.physics.arcade.overlap(enemyArr[enemy], bulletArr[bullet])) {
+                    enemyArr[enemy].kill();
+                    bulletArr[bullet].kill();
+                }
+            }
+        }
         
         
         
