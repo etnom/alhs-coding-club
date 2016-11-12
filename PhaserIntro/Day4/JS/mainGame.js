@@ -1,4 +1,5 @@
 var mySprite;
+var mySpriteFaceDirection = 0;      //0 = up, 1 = right, 2 = down, 3 = left
 var backGround;
 
 var mySpriteSpeed =10 ;
@@ -36,6 +37,7 @@ var gameVar = {
         backGround.width = game.width;
         
         mySprite = game.add.sprite(game.width/2, game.height/2, "sexyIMG");
+        game.physics.arcade.enable(mySprite);
         
         mySprite.scale.x = .5;
         mySprite.scale.y = .5;
@@ -83,26 +85,47 @@ var gameVar = {
             
         }
         
-        //create bullets
-        for (var i = 0; i < 20; i++) {
-            var bulletSprite = game.add.sprite(0, 0, "bulletIMG")
-        }
         
     }, 
     
     update: function () {
         if (keyW.isDown) {
             mySprite.y -= mySpriteSpeed;
+            mySpriteFaceDirection = 0;
         } else if (keyA.isDown) {
             mySprite.x -= mySpriteSpeed;
+            mySpriteFaceDirection = 3;
         } else if (keyS.isDown) {
             mySprite.y += mySpriteSpeed;
+            mySpriteFaceDirection = 2;
         } else if (keyD.isDown) {
             mySprite.x += mySpriteSpeed;
+            mySpriteFaceDirection = 1;
+
         }
         
         if (keySpace.isDown) {
-            mySprite.x += mySpriteSpeed;
+            //create bullets
+            var bulletSprite = game.add.sprite(mySprite.x, mySprite.y, "bulletIMG");
+            game.physics.arcade.enable(bulletSprite);
+            bulletSprite.width = 50;
+            bulletSprite.height = 20;
+            //put bullet into array
+            bulletArr[bulletArr.length] = bulletSprite;
+            
+            
+            var bulletSpeed = 500;
+            //shoot depend on direction mySprite is facing
+            if (mySpriteFaceDirection === 0) {
+                bulletSprite.body.velocity.y -= bulletSpeed;
+            } else if (mySpriteFaceDirection === 1) {
+                bulletSprite.body.velocity.x += bulletSpeed;
+            } else if (mySpriteFaceDirection === 2) {
+                bulletSprite.body.velocity.y += bulletSpeed;
+            } else if (mySpriteFaceDirection === 3) {
+                bulletSprite.body.velocity.x -= bulletSpeed;
+            }
+            
         }
         
         
