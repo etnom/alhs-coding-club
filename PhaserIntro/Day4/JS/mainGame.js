@@ -3,7 +3,7 @@ var backGround;
 
 var mySpriteSpeed =10 ;
 
-var keyW, keyA, keyS, keyD;
+var keyW, keyA, keyS, keyD, keySpace;
 
 var bulletArr = new Array();
 var enemyArr = new Array();
@@ -14,6 +14,7 @@ var gameVar = {
         game.load.image("backgroundIMG", "Assets/shrekObamaMemeDontOpen.jpg");
         game.load.image("sexyIMG", "Assets/sexyIMG.jpg");
         game.load.image("enemyIMG", "Assets/enemy.jpg");
+        game.load.image("bulletIMG", "Assets/bullet.jpg");
         
         
     }, 
@@ -21,10 +22,14 @@ var gameVar = {
     create: function() {
         console.log("its working!");
         
+        //enables Phaser's physics stuff so we can do collisions
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+        
         keyW = game.input.keyboard.addKey(Phaser.Keyboard.W);
         keyA = game.input.keyboard.addKey(Phaser.Keyboard.A);
         keyS = game.input.keyboard.addKey(Phaser.Keyboard.S);
         keyD = game.input.keyboard.addKey(Phaser.Keyboard.D);
+        keySpace = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
         backGround = game.add.sprite(0, 0, "backgroundIMG");
         backGround.height = game.height;
@@ -52,6 +57,10 @@ var gameVar = {
             //create a local varible for the sprite
             var enemySprite = enemyArr[i];
             
+            //enable physics for our enemies
+            game.physics.arcade.enable(enemySprite);
+
+            
             enemySprite.width = 50;
             enemySprite.height = 50;
             
@@ -74,6 +83,11 @@ var gameVar = {
             
         }
         
+        //create bullets
+        for (var i = 0; i < 20; i++) {
+            var bulletSprite = game.add.sprite(0, 0, "bulletIMG")
+        }
+        
     }, 
     
     update: function () {
@@ -84,6 +98,10 @@ var gameVar = {
         } else if (keyS.isDown) {
             mySprite.y += mySpriteSpeed;
         } else if (keyD.isDown) {
+            mySprite.x += mySpriteSpeed;
+        }
+        
+        if (keySpace.isDown) {
             mySprite.x += mySpriteSpeed;
         }
         
