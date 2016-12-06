@@ -5,6 +5,8 @@ var mySpriteSpeed =10 ;
 
 var keyW, keyA, keyS, keyD;
 
+var enemyArr = [];
+
 var gameVar = {
     preload: function () {
         game.load.image("yayIMG", "Assets/yay.jpg");
