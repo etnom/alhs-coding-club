@@ -1,6 +1,9 @@
+var gameState = 0;  //game states: 0 = loading, 1 = playing, 2 = lose
+
 var projectile, player; //Holds sprites for projectile and player
 var playerSpeed = 7;   //Determines speed of player
 var keyW, keyS;         //Used for movement via keyboard press
+
 var gameVar = 
 {
 	preload: function()
@@ -32,21 +35,31 @@ var gameVar =
 		//Binds keys to keyA and keyD
 		keyW = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		keyS = game.input.keyboard.addKey(Phaser.Keyboard.S);
+        
+        gameState = 1;
 	},
 
 	update: function()
-	{
-		//Player and projectile can collide
-		game.physics.arcade.collide(projectile, player);
+	{  
+        //make sure in gamestate 'playing'
+        if (gameState === 1) {
+            //Player and projectile can collide
+            game.physics.arcade.collide(projectile, player);
 
-		//Basic movements for player
-		if(keyW.isDown)
-		{
-			player.y -= playerSpeed;
-		}
-		else if(keyS.isDown)
-		{
-			player.y += playerSpeed;
-		}
+            //Basic movements for player
+            if(keyW.isDown)
+            {
+                player.y -= playerSpeed;
+            }
+            else if(keyS.isDown)
+            {
+                player.y += playerSpeed;
+            }
+            
+        }
+
+        
+
+        
 	}
 }
