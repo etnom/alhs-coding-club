@@ -22,7 +22,7 @@ var gameVar =
 		projectile.scale.setTo(0.03, 0.03);        //Change size of projectile
 		game.physics.arcade.enable(projectile);    //Enables projectile to use  phaser physics
 		projectile.body.collideWorldBounds = true; //Projectile doesn't go out of bounds
-		projectile.body.velocity.setTo(200, 200);  //Sets projectile's velocity (speed) 
+        game.physics.arcade.velocityFromAngle(200, 200, projectile.body.velocity);   //Sets projectile's velocity (speed)
 		projectile.body.bounce.set(1);             //Projectile bounces around
 
 		//Create player
@@ -36,13 +36,13 @@ var gameVar =
 		keyW = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		keyS = game.input.keyboard.addKey(Phaser.Keyboard.S);
         
-        gameState = 1;
+        gameState = 1;  //set gamestate to playing, because loading is all complete
 	},
 
 	update: function()
 	{  
         //make sure in gamestate 'playing'
-        if (gameState === 1) {
+        if (gameState === 1) {                 
             //Player and projectile can collide
             game.physics.arcade.collide(projectile, player);
 
@@ -65,9 +65,20 @@ var gameVar =
         
         //when in gameState 'game over' / 'lose'
         if (gameState === 2) {
-            //don't let projectile or player move
-            player.body.velocity = 0;
+            //don't let projectile move
             projectile.body.velocity = 0;
+            
+            //check for mouse click to start back game
+            if (game.input.activePointer.isDown)
+            {   
+                //kill everything
+                player.destroy();
+                projectile.destroy();
+                //reuse the code we used to start the game
+                this.create();
+
+            }
+            
         }
 
         
