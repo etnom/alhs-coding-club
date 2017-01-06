@@ -56,6 +56,18 @@ var gameVar =
                 player.y += playerSpeed;
             }
             
+            //if projectile goes behind player, game over
+            if (projectile.x < player.x) {
+                gameState = 2;
+            }
+            
+        }
+        
+        //when in gameState 'game over' / 'lose'
+        if (gameState === 2) {
+            //don't let projectile or player move
+            player.body.velocity = 0;
+            projectile.body.velocity = 0;
         }
 
         
