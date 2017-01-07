@@ -1,6 +1,6 @@
 var gameState = 0;  //game states: 0 = loading, 1 = playing, 2 = lose
 
-var projectile, player; //Holds sprites for projectile and player
+var projectile, player1, player2; //Holds sprites for projectile and players
 var playerSpeed = 7;   //Determines speed of player
 var keyW, keyS;         //Used for movement via keyboard press
 
@@ -27,16 +27,26 @@ var gameVar =
         game.physics.arcade.velocityFromAngle(200, 200, projectile.body.velocity);   //Sets projectile's velocity (speed)
 		projectile.body.bounce.set(1);             //Projectile bounces around
 
-		//Create player
-		player = game.add.sprite(20, 70, "playerImg");
-		player.scale.setTo(0.03, 0.03);            //Changes size of player
-		game.physics.arcade.enable(player);        //Enables player to use phaser physics
-		player.body.collideWorldBounds = true;     //Player doesn't go out of bounds
-		player.body.immovable = true;              //Player doesn't get moved when it hits the projectile
-
-		//Binds keys to keyA and keyD
+		//Create player 1
+		player1 = game.add.sprite(20, 70, "playerImg");
+		player1.scale.setTo(0.03, 0.03);            //Changes size of player
+		game.physics.arcade.enable(player1);        //Enables player to use phaser physics
+		player1.body.collideWorldBounds = true;     //Player doesn't go out of bounds
+		player1.body.immovable = true;              //Player doesn't get moved when it hits the projectile
+        
+        //Binds keys to keyA and keyD. These are used for player 1 controls
 		keyW = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		keyS = game.input.keyboard.addKey(Phaser.Keyboard.S);
+        
+        
+        //create player 2
+        player2 = game.add.sprite(750, 70, "playerImg");
+		player2.scale.setTo(0.03, 0.03);            //Changes size of player
+		game.physics.arcade.enable(player2);        //Enables player to use phaser physics
+		player2.body.collideWorldBounds = true;     //Player doesn't go out of bounds
+		player2.body.immovable = true;              //Player doesn't get moved when it hits the projectile
+
+
         
         gameState = 1;  //set gamestate to playing, because loading is all complete
 	},
@@ -46,20 +56,20 @@ var gameVar =
         //make sure in gamestate 'playing'
         if (gameState === 1) {
             //Player and projectile can collide
-            game.physics.arcade.collide(projectile, player);
+            game.physics.arcade.collide(projectile, player1);
 
             //Basic movements for player
             if(keyW.isDown)
             {
-                player.y -= playerSpeed;
+                player1.y -= playerSpeed;
             }
             else if(keyS.isDown)
             {
-                player.y += playerSpeed;
+                player1.y += playerSpeed;
             }
             
             //if projectile goes behind player, game over
-            if (projectile.x < player.x) {
+            if (projectile.x < player1.x) {
                 gameState = 2;
             }
             
@@ -83,7 +93,7 @@ var gameVar =
                 gameOverText = null;
                 
                 //destroy player and projectile
-                player.destroy();
+                player1.destroy();
                 projectile.destroy();
                 
                 //reuse the code we used to start the game
