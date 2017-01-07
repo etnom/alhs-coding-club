@@ -4,6 +4,8 @@ var projectile, player; //Holds sprites for projectile and player
 var playerSpeed = 7;   //Determines speed of player
 var keyW, keyS;         //Used for movement via keyboard press
 
+var gameOverText;   //when game is over, this will be displayed
+
 var gameVar = 
 {
 	preload: function()
@@ -42,7 +44,7 @@ var gameVar =
 	update: function()
 	{  
         //make sure in gamestate 'playing'
-        if (gameState === 1) {                 
+        if (gameState === 1) {
             //Player and projectile can collide
             game.physics.arcade.collide(projectile, player);
 
@@ -65,15 +67,25 @@ var gameVar =
         
         //when in gameState 'game over' / 'lose'
         if (gameState === 2) {
+            //create game over text, but make sure there wasn't one already created
+            if (gameOverText === null || gameOverText === undefined) {
+                gameOverText = game.add.text(100, 100, "Game Over. Click to replay.", { font: '28px Arial', fill: '#ffffff' });
+            }
+            
             //don't let projectile move
             projectile.body.velocity = 0;
             
             //check for mouse click to start back game
             if (game.input.activePointer.isDown)
-            {   
-                //kill everything
+            {    
+                //remove gameOverText
+                gameOverText.kill();
+                gameOverText = null;
+                
+                //destroy player and projectile
                 player.destroy();
                 projectile.destroy();
+                
                 //reuse the code we used to start the game
                 this.create();
 
