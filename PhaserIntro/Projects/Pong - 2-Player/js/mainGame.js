@@ -6,6 +6,8 @@ var keyW, keyS, keyUp, keyDown;         //Used for movement via keyboard press
 
 var gameOverText;   //when game is over, this will be displayed
 
+var isPlayer1Winner;    //flag used to determine winner
+
 var gameVar = 
 {
 	preload: function()
@@ -83,8 +85,12 @@ var gameVar =
       
             
             //if projectile goes behind player, game over
-            if (projectile.x < player1.x) {
+            if (projectile.x < player1.x) {     //projectile goes behind player 1, player 1 loses
                 gameState = 2;
+                isPlayer1Winner = false; 
+            } else if ( (projectile.x + projectile.width) > (player2.x + player2.width) ) {   //projectile goes behind player 2, player 2 loses
+                gameState = 2;
+                isPlayer1Winner = true;
             }
             
         }
