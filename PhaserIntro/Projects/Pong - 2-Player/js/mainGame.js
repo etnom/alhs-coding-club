@@ -112,9 +112,10 @@ var gameVar =
                 gameOverText.kill();
                 gameOverText = null;
                 
-                //destroy player and projectile
-                player1.destroy();
-                projectile.destroy();
+                //kill player and projectile
+                player1.kill();
+                player2.kill();
+                projectile.kill();
                 
                 //reuse the code we used to start the game
                 this.create();
