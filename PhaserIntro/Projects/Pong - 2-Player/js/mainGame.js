@@ -99,7 +99,12 @@ var gameVar =
         if (gameState === 2) {
             //create game over text, but make sure there wasn't one already created
             if (gameOverText === null || gameOverText === undefined) {
-                gameOverText = game.add.text(100, 100, "Game Over. Click to replay.", { font: '28px Arial', fill: '#ffffff' });
+                gameOverText = game.add.text(100, 100, "", { font: '28px Arial', fill: '#ffffff' });
+                if (isPlayer1Winner) {
+                    gameOverText.text = "Player 1 winner. Click to replay";
+                } else {
+                    gameOverText.text = "Player 2 winner. Click to replay";
+                }
             }
             
             //don't let projectile move
