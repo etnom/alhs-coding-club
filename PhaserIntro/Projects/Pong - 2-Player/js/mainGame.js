@@ -2,7 +2,7 @@ var gameState = 0;  //game states: 0 = loading, 1 = playing, 2 = lose
 
 var projectile, player1, player2; //Holds sprites for projectile and players
 var playerSpeed = 7;   //Determines speed of player
-var keyW, keyS;         //Used for movement via keyboard press
+var keyW, keyS, keyUp, keyDown;         //Used for movement via keyboard press
 
 var gameOverText;   //when game is over, this will be displayed
 
@@ -45,6 +45,10 @@ var gameVar =
 		game.physics.arcade.enable(player2);        //Enables player to use phaser physics
 		player2.body.collideWorldBounds = true;     //Player doesn't go out of bounds
 		player2.body.immovable = true;              //Player doesn't get moved when it hits the projectile
+        
+        //Binds keys to keyUp and keyDown. These are used for player 1 controls
+		keyUp = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+		keyDown = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
 
 
         
@@ -58,7 +62,7 @@ var gameVar =
             //Player and projectile can collide
             game.physics.arcade.collide(projectile, player1);
 
-            //Basic movements for player
+            //Basic movements for players
             if(keyW.isDown)
             {
                 player1.y -= playerSpeed;
@@ -67,6 +71,15 @@ var gameVar =
             {
                 player1.y += playerSpeed;
             }
+            if(keyUp.isDown)
+            {
+                player2.y -= playerSpeed;
+            }
+            else if(keyDown.isDown)
+            {
+                player2.y += playerSpeed;
+            }
+      
             
             //if projectile goes behind player, game over
             if (projectile.x < player1.x) {
