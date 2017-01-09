@@ -19,9 +19,22 @@ var gameVar =
 {
 	preload: function()
 	{
+        //
+        //
+        //TODO \/ \/ \/
+        //
+        //
+        
 		//Loads Images
 		game.load.iamge("playerImg", "Assets/line.png");
 		//TODO Load the penguin image (or any other image you like)
+        
+        //
+        //
+        //TODO ^^^^^^^^^
+        //
+        //
+  
 	},
 
 	create: function()
@@ -31,6 +44,12 @@ var gameVar =
 		game.stage.backgroundColor = '#003366';
 
 		
+        //
+        //
+        //TODO \/ \/ \/
+        //
+        //
+        
 		//Create projectile
 		projectile = game.add.sprite(, , );                                          //TODO Load the projectile image (If you are stuck, try looking at the lines of code for "Create player" below
 		projectile.scale.setTo(1, 1);                                                //TODO Change size of projectile
@@ -45,10 +64,29 @@ var gameVar =
 		game.physics.arcade.enable(player);            //Enables player to use phaser physics
 		player.body.collideWorldBounds = false;        //TODO Make it so player doesn't go out of bounds
 		player.body.immovable = true;                  //Player doesn't get moved when it hits the projectile
+        
+        //
+        //
+        //TODO ^^^^^^^^^
+        //
+        //
+        
 
+        //
+        //
+        //TODO \/ \/ \/
+        //
+        //
+        
 		//Binds keys to keyA and keyD
 		keyW = ; //TODO Add keyw
 		keyS = ; //TODO Add keys
+        
+        //
+        //
+        //TODO ^^^^^^^^^
+        //
+        //
         
 		gameState = 1;  //set gamestate to playing, because loading is all complete
 	},
@@ -60,6 +98,12 @@ var gameVar =
 		{
 			//Player and projectile can collide
 			game.physics.arcade.collide(projectile, player);
+            
+            //
+            //
+            //TODO \/ \/ \/
+            //
+            //
 
 			//Basic movements for player
 			if(//TODO IF keyW is pressed)
@@ -76,6 +120,12 @@ var gameVar =
 			{
 				gameState = 2;
 			}
+                      
+            //
+            //
+            //TODO ^^^^^^^^^
+            //
+            //  
 		}
 
 		//when in gameState 'game over' / 'lose'
