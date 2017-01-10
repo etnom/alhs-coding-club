@@ -26,7 +26,7 @@ var gameVar =
         //
         
 		//Loads Images
-		game.load.iamge("playerImg", "Assets/line.png");
+		game.load.image("playerImg", "Assets/line.png");
 		//TODO Load the penguin image (or any other image you like)
         
         //
