@@ -114,6 +114,9 @@ var gameVar =
                 } else {
                     gameOverText.text = "Player 2 winner. Click to replay";
                 }
+                
+                //play game over sound
+                gameEndSound.play();
             }
             
             //don't let projectile move
