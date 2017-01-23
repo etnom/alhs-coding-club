@@ -10,7 +10,7 @@ var isPlayer1Winner;    //flag used to determine winner
 
 var gameEndSound, projectileCollisionSound;
 
-var p1Score, p2Score, totalGames;
+var p1Score = 0, p2Score = 0, totalGames = 0;
 
 var gameVar = 
 {
@@ -120,9 +120,9 @@ var gameVar =
             if (gameOverText === null || gameOverText === undefined) {
                 gameOverText = game.add.text(100, 100, "", { font: '28px Arial', fill: '#ffffff' });
                 if (isPlayer1Winner) {
-                    gameOverText.text = "Player 1 winner. Click to replay";
+                    gameOverText.text = "Player 1 winner. Click to replay. \nPlayer 1: " + p1Score + "\nPlayer 2: " + p2Score + "\nTotal games: " + totalGames;
                 } else {
-                    gameOverText.text = "Player 2 winner. Click to replay";
+                    gameOverText.text = "Player 2 winner. Click to replay. \nPlayer 1: " + p1Score + "\nPlayer 2: " + p2Score + "\nTotal games: " + totalGames;
                 }
                 
                 //play game over sound
