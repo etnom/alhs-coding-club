@@ -71,8 +71,12 @@ var gameVar =
         //make sure in gamestate 'playing'
         if (gameState === 1) {
             //Players and projectile can collide
-            game.physics.arcade.collide(projectile, player1);
-            game.physics.arcade.collide(projectile, player2);
+            game.physics.arcade.collide(projectile, player1, function () {
+                projectileCollisionSound.play();
+            });
+            game.physics.arcade.collide(projectile, player2, function () {
+                projectileCollisionSound.play();
+            });
 
             //Basic movements for players
             if(keyW.isDown)
