@@ -8,12 +8,18 @@ var gameOverText;   //when game is over, this will be displayed
 
 var isPlayer1Winner;    //flag used to determine winner
 
+var gameEndSound, projectileCollisionSound;
+
 var gameVar = 
 {
 	preload: function()
 	{
 		game.load.image("projectileImg", "assets/penguin.png");
 		game.load.image("playerImg", "assets/line.png");
+        
+        game.load.audio("projectileCollisionSound", "assets/Sounds/glass_ping.mp3");
+        game.load.audio("gameEndSound", "assets/Sounds/phone_alert.mp3");
+        
 	},
 
 	create: function()
@@ -51,7 +57,10 @@ var gameVar =
         //Binds keys to keyUp and keyDown. These are used for player 1 controls
 		keyUp = game.input.keyboard.addKey(Phaser.Keyboard.UP);
 		keyDown = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-
+        
+        //load in sounds so we can use them into our game
+        gameEndSound = game.add.audio("gameEndSound");
+        projectileCollisionSound = game.add.audio("projectileCollisionSound");
 
         
         gameState = 1;  //set gamestate to playing, because loading is all complete
