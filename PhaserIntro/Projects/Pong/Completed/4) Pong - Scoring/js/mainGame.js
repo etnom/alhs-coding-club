@@ -10,6 +10,8 @@ var isPlayer1Winner;    //flag used to determine winner
 
 var gameEndSound, projectileCollisionSound;
 
+var p1Score, p2Score, totalGames;
+
 var gameVar = 
 {
 	preload: function()
@@ -101,9 +103,13 @@ var gameVar =
             if (projectile.x < player1.x) {     //projectile goes behind player 1, player 1 loses
                 gameState = 2;
                 isPlayer1Winner = false; 
+                totalGames++;
+                p1Score++;
             } else if ( (projectile.x + projectile.width) > (player2.x + player2.width) ) {   //projectile goes behind player 2, player 2 loses
                 gameState = 2;
                 isPlayer1Winner = true;
+                totalGames++;
+                p2Score++;
             }
             
         }
